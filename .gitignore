@@ -23,6 +23,6 @@
 hs_err_pid*
 
 
-target/
+target/*
 
 !target/target/JavaLaboratoriesGUI_complete_standalone.jar
