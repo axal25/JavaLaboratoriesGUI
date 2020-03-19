@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.lab1.FilesOpTest" time="2.63" tests="24" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.lab1.FilesOpTest" time="2.836" tests="24" errors="0" skipped="0" failures="0">
   <properties/>
-  <testcase name="tryNewFile" classname="utils.lab1.FilesOpTest" time="0.304"/>
-  <testcase name="openExistingFile" classname="utils.lab1.FilesOpTest" time="0.094"/>
-  <testcase name="openExistingFile1" classname="utils.lab1.FilesOpTest" time="0.157"/>
-  <testcase name="openNewFile" classname="utils.lab1.FilesOpTest" time="0.166"/>
-  <testcase name="openNewFile1" classname="utils.lab1.FilesOpTest" time="0.055"/>
-  <testcase name="openFileReader" classname="utils.lab1.FilesOpTest" time="0.221"/>
-  <testcase name="closeFileReader" classname="utils.lab1.FilesOpTest" time="0.086"/>
-  <testcase name="openBufferedReader" classname="utils.lab1.FilesOpTest" time="0.054"/>
-  <testcase name="closeBufferedReader" classname="utils.lab1.FilesOpTest" time="0.061"/>
-  <testcase name="getFileSizeBytes" classname="utils.lab1.FilesOpTest" time="0.215"/>
-  <testcase name="getFileSizeBytes1" classname="utils.lab1.FilesOpTest" time="0.318"/>
-  <testcase name="sizeBytes2KiloB" classname="utils.lab1.FilesOpTest" time="0.006"/>
-  <testcase name="sizeBytes2MegaB" classname="utils.lab1.FilesOpTest" time="0.002"/>
-  <testcase name="sizeBytes2GigaB" classname="utils.lab1.FilesOpTest" time="0.002"/>
-  <testcase name="getFilePath" classname="utils.lab1.FilesOpTest" time="0.055"/>
-  <testcase name="isDirectory" classname="utils.lab1.FilesOpTest" time="0.003"/>
-  <testcase name="openFileWriter" classname="utils.lab1.FilesOpTest" time="0.107"/>
-  <testcase name="openBufferedWriter" classname="utils.lab1.FilesOpTest" time="0.116"/>
-  <testcase name="closeBufferedWriter" classname="utils.lab1.FilesOpTest" time="0.165"/>
-  <testcase name="closeFileWriter" classname="utils.lab1.FilesOpTest" time="0.161"/>
-  <testcase name="deleteFile" classname="utils.lab1.FilesOpTest" time="0.213"/>
+  <testcase name="tryNewFile" classname="utils.lab1.FilesOpTest" time="0.231"/>
+  <testcase name="openExistingFile" classname="utils.lab1.FilesOpTest" time="0.309"/>
+  <testcase name="openExistingFile1" classname="utils.lab1.FilesOpTest" time="0.134"/>
+  <testcase name="openNewFile" classname="utils.lab1.FilesOpTest" time="0.303"/>
+  <testcase name="openNewFile1" classname="utils.lab1.FilesOpTest" time="0.053"/>
+  <testcase name="openFileReader" classname="utils.lab1.FilesOpTest" time="0.233"/>
+  <testcase name="closeFileReader" classname="utils.lab1.FilesOpTest" time="0.092"/>
+  <testcase name="openBufferedReader" classname="utils.lab1.FilesOpTest" time="0.056"/>
+  <testcase name="closeBufferedReader" classname="utils.lab1.FilesOpTest" time="0.056"/>
+  <testcase name="getFileSizeBytes" classname="utils.lab1.FilesOpTest" time="0.214"/>
+  <testcase name="getFileSizeBytes1" classname="utils.lab1.FilesOpTest" time="0.313"/>
+  <testcase name="sizeBytes2KiloB" classname="utils.lab1.FilesOpTest" time="0.004"/>
+  <testcase name="sizeBytes2MegaB" classname="utils.lab1.FilesOpTest" time="0.001"/>
+  <testcase name="sizeBytes2GigaB" classname="utils.lab1.FilesOpTest" time="0.001"/>
+  <testcase name="getFilePath" classname="utils.lab1.FilesOpTest" time="0.058"/>
+  <testcase name="isDirectory" classname="utils.lab1.FilesOpTest" time="0.004"/>
+  <testcase name="openFileWriter" classname="utils.lab1.FilesOpTest" time="0.105"/>
+  <testcase name="openBufferedWriter" classname="utils.lab1.FilesOpTest" time="0.105"/>
+  <testcase name="closeBufferedWriter" classname="utils.lab1.FilesOpTest" time="0.157"/>
+  <testcase name="closeFileWriter" classname="utils.lab1.FilesOpTest" time="0.157"/>
+  <testcase name="deleteFile" classname="utils.lab1.FilesOpTest" time="0.207"/>
   <testcase name="getStringSizeBytes" classname="utils.lab1.FilesOpTest" time="0.001"/>
-  <testcase name="renameFile" classname="utils.lab1.FilesOpTest" time="0.004"/>
+  <testcase name="renameFile" classname="utils.lab1.FilesOpTest" time="0.005"/>
   <testcase name="renameFile1" classname="utils.lab1.FilesOpTest" time="0.002"/>
 </testsuite>
