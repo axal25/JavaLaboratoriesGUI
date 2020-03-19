@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: laboratories.lab1.CrimesFileOpTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.216 s - in laboratories.lab1.CrimesFileOpTest
