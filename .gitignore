@@ -26,7 +26,7 @@
 hs_err_pid*
 
 target/*
-!target/target/JavaLaboratoriesGUI_complete_standalone.jar
+!target/JavaLaboratoriesGUI_complete_standalone.jar
 .idea/
 .mvn
 mvnw
