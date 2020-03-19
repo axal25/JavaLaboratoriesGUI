@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="laboratories.lab1.CrimesFileOpTest" time="0.209" tests="4" errors="0" skipped="0" failures="0">
+  <properties/>
+  <testcase name="cutFileToSize1" classname="laboratories.lab1.CrimesFileOpTest" time="0.016"/>
+  <testcase name="cutFileToSize2" classname="laboratories.lab1.CrimesFileOpTest" time="0.055"/>
+  <testcase name="cutFileToSize3" classname="laboratories.lab1.CrimesFileOpTest" time="0.067"/>
+  <testcase name="cutFileToSize4" classname="laboratories.lab1.CrimesFileOpTest" time="0.068"/>
+</testsuite>
