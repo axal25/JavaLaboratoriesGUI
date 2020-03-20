@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXRippler?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ui.center.options.HomeUIController"
-            fx:id="centerVBox"
-            alignment="CENTER">
+<VBox fx:id="centerNode" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.HomeUIController">
 
     <children>
+      <Region VBox.vgrow="ALWAYS" />
         <HBox alignment="CENTER">
             <children>
-                <Label text="Home"/>
+                <JFXRippler>
+                    <Label text="Welcome to Java Laboratories GUI" textAlignment="CENTER"/>
+                </JFXRippler>
             </children>
         </HBox>
+      <Region VBox.vgrow="ALWAYS" />
+        <HBox alignment="CENTER">
+            <children>
+                <JFXRippler>
+                    <Label text="Autor: Jacek Oleś" textAlignment="CENTER"/>
+                </JFXRippler>
+            </children>
+        </HBox>
+      <Region VBox.vgrow="ALWAYS" />
+        <HBox alignment="CENTER">
+            <children>
+                <JFXRippler>
+                    <Label text="The problems presented in this program are sourced from various places. Two main such resources for me were Object Oriented Programming courses taught by MEngr. Michał Wypych and Dr. Engr. Szymon Bobek" wrapText="true" textAlignment="CENTER"/>
+                </JFXRippler>
+            </children>
+        </HBox>
+      <Region VBox.vgrow="ALWAYS" />
     </children>
 
 </VBox>

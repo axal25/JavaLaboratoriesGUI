@@ -2,20 +2,21 @@ package ui.center.options;
 
 import javafx.scene.Parent;
 import ui.MainUI;
+import ui.MainUIController;
 
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 
-public class HomeUI extends AbstractCenterUI {
-    public static final String[] VIEW_FILE_NAMES = {"HomeUI.fxml"};
+public class Laboratory2UI extends AbstractCenterUI {
+    public static final String[] VIEW_FILE_NAMES = {"Laboratory2UI.fxml"};
     public static final String VIEW_FILE_PACKAGE = "ui" + File.separator + "center" + File.separator + "options";
-    public static final String[] EXERCISES = {"The only welcome page available"};
+    public static final String[] EXERCISES = {AbstractCenterUI.DEFAULT_EXERCISES_MENU_ITEM_TEXT};
 
     private Parent parent;
-    private HomeUIController controller;
+    private Laboratory2UIController controller;
 
-    public HomeUI(String exercise) {
+    public Laboratory2UI(String exercise) {
         super(exercise);
     }
 

@@ -7,15 +7,23 @@ import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 
-public class HomeUI extends AbstractCenterUI {
-    public static final String[] VIEW_FILE_NAMES = {"HomeUI.fxml"};
+public class Laboratory1UI extends AbstractCenterUI {
+    public static final String[] VIEW_FILE_NAMES = {
+            "Laboratory1UI_Exercise1.fxml",
+            "Laboratory1UI_Exercise2.fxml",
+            "Laboratory1UI_Exercise3.fxml",
+    };
     public static final String VIEW_FILE_PACKAGE = "ui" + File.separator + "center" + File.separator + "options";
-    public static final String[] EXERCISES = {"The only welcome page available"};
+    public static final String[] EXERCISES = {
+            "Exercise #1",
+            "Exercise #2",
+            "Exercise #3",
+    };
 
     private Parent parent;
-    private HomeUIController controller;
+    private Laboratory1UIController controller;
 
-    public HomeUI(String exercise) {
+    public Laboratory1UI(String exercise) {
         super(exercise);
     }
 

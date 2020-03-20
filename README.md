@@ -4,8 +4,11 @@ Java project includes all of small projects from coding laboratories
 ## How to run:
 1. `git clone https://github.com/axal25/JavaLaboratoriesGUI.git`
 1. `cd JavaLaboratoriesGUI`
-1. `mvn clean package`
-1. `java -jar JavaLaboratoriesGUI_complete_standalone.jar`
+    1. Run executable jar file:
+        1. `java -jar JavaLaboratoriesGUI_complete_standalone.jar`
+    1. Compile package before running executable jar file:
+        1. `mvn clean package`
+        1. `java -jar JavaLaboratoriesGUI_complete_standalone.jar`
 
 ## lab1
 ### Functionality

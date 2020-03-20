@@ -7,15 +7,15 @@ import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
 
-public class HomeUI extends AbstractCenterUI {
-    public static final String[] VIEW_FILE_NAMES = {"HomeUI.fxml"};
+public class LambdaExpressionsUI extends AbstractCenterUI {
+    public static final String[] VIEW_FILE_NAMES = {"LambdaExpressionsUI.fxml"};
     public static final String VIEW_FILE_PACKAGE = "ui" + File.separator + "center" + File.separator + "options";
-    public static final String[] EXERCISES = {"The only welcome page available"};
+    public static final String[] EXERCISES = {AbstractCenterUI.DEFAULT_EXERCISES_MENU_ITEM_TEXT};
 
     private Parent parent;
-    private HomeUIController controller;
+    private LambdaExpressionsUIController controller;
 
-    public HomeUI(String exercise) {
+    public LambdaExpressionsUI(String exercise) {
         super(exercise);
     }
 

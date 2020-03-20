@@ -1,11 +1,12 @@
 package ui.center.options;
 
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeUIController extends AbstractCenterUIController {
+public class Laboratory1UIController extends AbstractCenterUIController {
     public VBox centerNode;
 
     @Override

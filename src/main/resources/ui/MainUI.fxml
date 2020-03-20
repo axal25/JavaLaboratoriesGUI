@@ -21,16 +21,16 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Exercises">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Exercise 1" />
-                        <MenuItem mnemonicParsing="false" text="Exercise 2" />
-                        <MenuItem mnemonicParsing="false" text="Exercise 3" />
-                        <MenuItem mnemonicParsing="false" text="Exercise 4" />
+                        <MenuItem mnemonicParsing="false" text="PLACE HOLDER 1" />
+                        <MenuItem mnemonicParsing="false" text="PLACE HOLDER 2" />
+                        <MenuItem mnemonicParsing="false" text="PLACE HOLDER 3" />
+                        <MenuItem mnemonicParsing="false" text="PLACE HOLDER 4" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Show">
+                <Menu mnemonicParsing="false" text="Show problem">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Problem" />
-                        <MenuItem mnemonicParsing="false" text="Solution" />
+                        <MenuItem mnemonicParsing="false" text="Show" />
+                        <MenuItem mnemonicParsing="false" text="Hide" />
                     </items>
                 </Menu>
             </menus>
