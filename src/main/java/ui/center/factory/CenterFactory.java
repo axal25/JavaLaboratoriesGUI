@@ -1,6 +1,11 @@
 package ui.center.factory;
 
 import ui.center.options.*;
+import ui.center.options.home.HomeUI;
+import ui.center.options.laboratory1.Laboratory1UI;
+import ui.center.options.laboratory2.Laboratory2UI;
+import ui.center.options.lambda.expressions.LambdaExpressionsUI;
+import ui.center.options.mayeryn.recruitment.MayerynRecruitmentUI;
 
 public class CenterFactory {
 

@@ -1,20 +1,11 @@
 package laboratories.lab1;
 
-public class Abc
-{
-
-    /**
-     * @param args
-     */
-    public Abc()
-    {
+public class Abc {
+    public Abc() {
 
     }
-
-    public Abc clone()
-    {
+    public Abc clone() {
         System.out.println("abc.clone()");
         return new Abc();
     }
-
 }

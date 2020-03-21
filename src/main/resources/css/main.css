@@ -69,10 +69,18 @@
     -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, rgb(120, 120, 120), rgb(60, 60, 60));
 }
 
+.menu-bar > .container > .menu-button > .label,
+.menu-bar > .container > .menu-button > .label,
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: rgb(185, 185, 185);
+    -fx-opacity: 0.75;
+}
+
 .menu-bar > .container > .menu-button > .label:hover,
 .menu-bar > .container > .menu-button > .label:showing,
 .menu-bar > .container > .menu-button > .label:focused {
-    -fx-opacity: 0.5;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-opacity: 1;
 }
 
 .menu-bar .menu-button:hover,
@@ -93,6 +101,44 @@
     -fx-background-radius: 10;
 }
 
+.menu-item .label {
+    -fx-opacity: 0.75;
+}
+
 .menu-item:focused .label {
-    -fx-opacity: 0.5;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-opacity: 1;
+}
+
+.menu-item-selected {
+    -fx-background-color: rgb(77,102,204);
+    -fx-background-radius: 10;
+    -fx-border-color: rgb(93, 119, 255);
+    -fx-border-width: 5;
+    -fx-border-radius: 5;
+    -fx-opacity: 0.75;
+}
+
+.menu-item-selected:focused .label {
+    -fx-opacity: 0.75;
+}
+
+.menu-item-selected:focused {
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-opacity: 1;
+}
+
+.menu-item-selected:focused .label {
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-opacity: 1;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: rgb(100, 100, 100);
+}
+
+.jfx-text-area{
+    -fx-background-color: rgb(150, 150, 150);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-border-width: 5;
 }

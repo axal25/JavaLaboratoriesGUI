@@ -77,14 +77,6 @@ public class Menu {
                 info.ToDo::printWhatIsLefttoDo
                 );
 
-
-        // laboratories.lab1.Lab1_main.main();
-        optionsToBe[1] = new Option(
-                laboratories.lab1.Lab1_main.class.getName(),
-                "main()",
-                laboratories.lab1.Lab1_main::main
-        );
-
         // java8.func.lambda.LambdaExamples.main();
         optionsToBe[2] = new Option(
                 java8.func.lambda.LambdaExamples.class.getName(),

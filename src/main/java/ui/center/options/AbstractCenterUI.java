@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 
 public abstract class AbstractCenterUI {
     public static final String DEFAULT_EXERCISES_MENU_ITEM_TEXT = "The only exercise";
@@ -20,12 +21,12 @@ public abstract class AbstractCenterUI {
     public AbstractCenterUI(String exercise) {
         try {
             loadController(exercise);
-        } catch(IOException e) {
+        } catch(IOException | NoMatchingIndexFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void loadController(String exercise) throws IOException {
+    public void loadController(String exercise) throws IOException, NoMatchingIndexFoundException {
         int viewFileIndex = getViewFileIndex(exercise);
         URL url = loadURL(viewFileIndex);
         FXMLLoader fxmlLoader = new FXMLLoader(url);
@@ -33,7 +34,12 @@ public abstract class AbstractCenterUI {
         this.controller = fxmlLoader.getController();
     }
 
-    public abstract int getViewFileIndex(String exercise);
+    public abstract int getViewFileIndex(String exercise) throws NoMatchingIndexFoundException;
+    public int getSafelyViewFileIndex(String[] EXERCISES, String exercise) throws NoMatchingIndexFoundException {
+        int viewFileIndex = Arrays.asList(EXERCISES).indexOf(exercise);
+        if(viewFileIndex == -1) throw new NoMatchingIndexFoundException(EXERCISES, exercise);
+        return viewFileIndex;
+    }
     public abstract URL loadURL(int viewFileIndex);
 
     public AbstractCenterUIController getController() {
