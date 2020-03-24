@@ -10,7 +10,7 @@ Java project includes all of small projects from coding laboratories
 <img src="./screens/Exit_Confirm_Pop_Up.png" width="30%">
 
 ##### Laboratory #1 Introduction Loading view [Laboratories > Laboratory #1 (> Exercises > Introduction)*]:
-`* optional`
+`* optional`  
 <img src="./screens/Laboratory_1_Introduction_Loading.png" width="30%">
 
 ##### Laboratory #1 Introduction [Laboratories > Laboratory #1 (> Exercises > Introduction)]:
