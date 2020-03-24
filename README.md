@@ -1,6 +1,21 @@
 # JavaLaboratoriesGUI
 Java project includes all of small projects from coding laboratories
 
+## Screens:
+
+##### Home window:
+<img src="./screens/Home.png" width="30%">
+
+##### Exit Confirmation Pop Up Window [on close window (X button click)]:
+<img src="./screens/Exit_Confirm_Pop_Up.png" width="30%">
+
+##### Laboratory #1 Introduction Loading view [Laboratories > Laboratory #1 (> Exercises > Introduction)*]:
+`* optional`
+<img src="./screens/Laboratory_1_Introduction_Loading.png" width="30%">
+
+##### Laboratory #1 Introduction [Laboratories > Laboratory #1 (> Exercises > Introduction)]:
+<img src="./screens/Laboratory_1_Introduction.png" width="30%">
+
 ## Tech stack:
 1. Java 11
 2. Maven 3.6.0
