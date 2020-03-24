@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXRippler?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -15,10 +13,45 @@
     <children>
         <HBox alignment="CENTER">
             <children>
-                <Label text="Laboratory #1 Introduction 1" />
+                <Label text="Laboratory #1 Introduction 1">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></Label>
             </children>
         </HBox>
-        <fx:include source="Laboratory1UI_Introduction_Included.fxml"/>
+      <Region VBox.vgrow="ALWAYS" />
+      <HBox alignment="CENTER">
+         <children>
+            <JFXRippler>
+               <children>
+                  <Label text="Loading..." />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </JFXRippler>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER">
+         <children>
+            <JFXProgressBar>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </JFXProgressBar>
+         </children>
+      </HBox>
+      <Region VBox.vgrow="ALWAYS" />
+<!--        <fx:include source="Laboratory1UI_Introduction_Included.fxml" />-->
     </children>
 
 </VBox>

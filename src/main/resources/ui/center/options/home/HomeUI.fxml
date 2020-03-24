@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXRippler?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -13,7 +14,13 @@
         <HBox alignment="CENTER">
             <children>
                 <JFXRippler>
-                    <Label text="Welcome to Java Laboratories GUI" textAlignment="CENTER"/>
+                    <Label text="Welcome to Java Laboratories GUI" textAlignment="CENTER" />
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
                 </JFXRippler>
             </children>
         </HBox>
@@ -21,7 +28,13 @@
         <HBox alignment="CENTER">
             <children>
                 <JFXRippler>
-                    <Label text="Autor: Jacek Oleś" textAlignment="CENTER"/>
+                    <Label text="Autor: Jacek Oleś" textAlignment="CENTER" />
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
                 </JFXRippler>
             </children>
         </HBox>
@@ -29,7 +42,13 @@
         <HBox alignment="CENTER">
             <children>
                 <JFXRippler>
-                    <Label text="The problems presented in this program are sourced from various places. Two main such resources for me were Object Oriented Programming courses taught by MEngr. Michał Wypych and Dr. Engr. Szymon Bobek" wrapText="true" textAlignment="CENTER"/>
+                    <Label text="The problems presented in this program are sourced from various places. Two main such resources for me were Object Oriented Programming courses taught by MEngr. Michał Wypych and Dr. Engr. Szymon Bobek" textAlignment="CENTER" wrapText="true" />
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
                 </JFXRippler>
             </children>
         </HBox>

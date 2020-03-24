@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -33,7 +35,7 @@ public class MainUIController implements Initializable {
     public MenuBar menuBar;
 
     private AbstractCenterUI abstractCenterUI;
-    private Node centerNode;
+    private ObjectProperty<Node> centerNodeProperty = new SimpleObjectProperty<>();
     private CenterOption centerOption;
     private String exercise;
 
@@ -51,10 +53,18 @@ public class MainUIController implements Initializable {
 
     private void loadCenter() {
         this.abstractCenterUI = CenterFactory.getCenter(this.centerOption, this.exercise);
-        Node newCenterNode = abstractCenterUI.getController().getCenterNode();
-        this.mainBorderPane.getChildren().removeAll(this.centerNode);
-        this.mainBorderPane.setCenter(newCenterNode);
-        this.centerNode = newCenterNode;
+        ObjectProperty<Node> newCenterNodeProperty = abstractCenterUI.getController().centerNodeProperty;
+        setCenterNodeProperty(newCenterNodeProperty);
+    }
+
+    private void setCenterNodeProperty(ObjectProperty<Node> newCenterNodeProperty) {
+        this.mainBorderPane.getChildren().removeAll(this.centerNodeProperty.get());
+        this.centerNodeProperty = newCenterNodeProperty;
+        this.mainBorderPane.setCenter(this.centerNodeProperty.get());
+        this.centerNodeProperty.addListener((observer, beforeEventCenterNode, AfterEventCenterNode) -> {
+            this.mainBorderPane.getChildren().removeAll(beforeEventCenterNode);
+            this.mainBorderPane.setCenter(AfterEventCenterNode);
+        });
     }
 
     private void loadMenus() {
