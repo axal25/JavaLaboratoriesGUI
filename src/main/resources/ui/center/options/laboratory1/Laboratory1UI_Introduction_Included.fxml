@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.laboratory1.Laboratory1UIControllerIncluded">
+<ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.laboratory1.Laboratory1UIControllerIncluded">
    <content>
       <AnchorPane prefHeight="1575.0" prefWidth="785.0">
          <children>

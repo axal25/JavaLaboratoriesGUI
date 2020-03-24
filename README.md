@@ -1,14 +1,20 @@
 # JavaLaboratoriesGUI
 Java project includes all of small projects from coding laboratories
 
+## Tech stack:
+1. Java 11
+2. Maven 3.6.0
+3. JavaFX 11
+4. JFoenix 9.0.8 
+
 ## How to run:
 1. `git clone https://github.com/axal25/JavaLaboratoriesGUI.git`
 1. `cd JavaLaboratoriesGUI`
     1. Run executable jar file:
-        1. `java -jar JavaLaboratoriesGUI_complete_standalone.jar`
+        1. `java -jar target/JavaLaboratoriesGUI_complete_standalone.jar`
     1. Compile package before running executable jar file:
         1. `mvn clean package`
-        1. `java -jar JavaLaboratoriesGUI_complete_standalone.jar`
+        1. `java -jar target/JavaLaboratoriesGUI_complete_standalone.jar`
 
 ## lab1
 ### Functionality
@@ -26,7 +32,11 @@ Java project includes all of small projects from coding laboratories
 #### Custom exceptions handling
 * [location: utils.ExceptionMessageGenerator](https://github.com/axal25/JavaLaboratoriesGUI/blob/master/src/utils/ExceptionMessageGenerator.java)
 
-# Java Virtual Machine launch options
+### There are 2 ways to add JavaFX and JFoenix to your class path:
+1. Add those libraries to your class path via IDE
+2. Add those libraries to your program launch options via JVM launch options
+
+### 1. Java Virtual Machine launch options
 
 ##### When you try to launch Main class using your IDE you should put those options inside "VM Options: " field
 ##### The only parameter you should modify in these lines is `--module-path ...` line.
@@ -55,3 +65,14 @@ Java project includes all of small projects from coding laboratories
 4. using command: `cp ~/Downloads/jfoenix-9.0.8.jar /usr/share/openjfx/lib/`  
 5. and have created symbolic link inside `/usr/share/openjfx/lib` using command:  
 6. `sudo ln -s /usr/share/java/jfoenix-9.0.8.jar /usr/share/openjfx/lib/jfeonix-9.0.8.jar`
+
+### 2. Class path IDE
+1. In IntelliJ go to:  
+`File > Project Structure > Global Libraries > + > Java`
+2. Find in file explorer .jar files for `JavaFX` libraries
+3. [OPTIONAL] Change class Global Library name to something more meaningful like `JavaFX-11`
+4. Repeat the process for `JFoenix` library
+5. [OPTIONAL] In `File > Project Structure > Global Libraries`
+    1. Right-click `JavaFX-11` and click `Add to modules` select module (this project) > OK > OK
+    2. Repeat for `JFoenix`
+6. Now you can run your main class without any JVM options
