@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class Laboratory1UIController extends AbstractCenterUIController {
 
-    public Node centerNode; // just for injection from Laboratory1UI_Introduction.fxml
+    public Node centerNode; // just for injection from Laboratory1UI_Introduction_Loading.fxml or other Laboratory1UI_... .fxml file
     public ObjectProperty<Node> centerNodeProperty = new SimpleObjectProperty<>();
 
     public Laboratory1UIController() {

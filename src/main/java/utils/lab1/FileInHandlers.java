@@ -1,11 +1,9 @@
 package utils.lab1;
 
 import utils.ExceptionMessageGenerator;
-import utils.lab1.exceptions.FileInHandlersException;
+import utils.lab1.exceptions.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class FileInHandlers {
     public File file;
@@ -27,36 +25,27 @@ public class FileInHandlers {
         return this;
     }
 
-    public FileInHandlers open(File file) {
+    public FileInHandlers open(File file) throws FileNotFoundException, BufferedReaderOpenException, FileReaderOpenException {
         if( file != null ) {
-            fileReader = utils.lab1.FilesOp.openFileReader( file );
-            bufferedReader = utils.lab1.FilesOp.openBufferedReader( fileReader );
+            fileReader = FileReaderOps.openFileReader( file );
+            bufferedReader = BufferedReaderOps.openBufferedReader( fileReader );
             set( file, fileReader, bufferedReader );
         }
         return this;
     }
 
-    public FileInHandlers close(File file, FileReader fileReader, BufferedReader bufferedReader ) {
+    public FileInHandlers close(File file, FileReader fileReader, BufferedReader bufferedReader ) throws FileInHandlersException, FileReaderCloseException, IOException, BufferedReaderCloseException {
         final String functionName = "close(File file, FileReader fileReader, BufferedReader bufferedReader )";
-        if( file == null || fileReader == null || bufferedReader == null ) {
-            String message = "file == null || fileReader == null || bufferedReader == null";
-            if( file == null ) message += "\n\r" + "file == null";
-            if( fileReader == null ) message += "\n\r" + "fileReader == null";
-            if( bufferedReader == null ) message += "\n\r" + "bufferedReader == null";
-            try {
-                throw new FileInHandlersException( this.getClass().getName(), functionName, message);
-            } catch (FileInHandlersException e) {
-                String exceptionMessage = ExceptionMessageGenerator.getMessage(FilesOp.class.getName(), functionName, e);
-                System.out.println(exceptionMessage);
-            }
-        }
-        fileReader = utils.lab1.FilesOp.closeFileReader( fileReader );
-        bufferedReader = utils.lab1.FilesOp.closeBufferedReader( bufferedReader );
+        if( file == null ) throw new FileInHandlersException( this.getClass().getName(), functionName, "file == null");
+        if( fileReader == null ) throw new FileInHandlersException( this.getClass().getName(), functionName, "fileReader == null");
+        if( bufferedReader == null ) throw new FileInHandlersException( this.getClass().getName(), functionName, "bufferedReader == null");
+        fileReader = FileReaderOps.closeFileReader( fileReader );
+        bufferedReader = BufferedReaderOps.closeBufferedReader( bufferedReader );
         set( file, fileReader, bufferedReader );
         return this;
     }
 
-    public FileInHandlers close() {
+    public FileInHandlers close() throws BufferedReaderCloseException, FileInHandlersException, FileReaderCloseException, IOException {
         return this.close( this.file, this.fileReader, this.bufferedReader );
     }
 }

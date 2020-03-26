@@ -2,35 +2,35 @@ package laboratories.lab1;
 
 import utils.ExceptionMessageGenerator;
 import utils.lab1.FileInHandlers;
-import utils.lab1.FilesOp;
-import utils.lab1.ParseOp;
+import utils.lab1.FileOps;
+import utils.lab1.ParseOps;
+import utils.lab1.exceptions.*;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 // source file: https://data.cityofchicago.org/Administration-Finance/Current-Employee-Names-Salaries-and-Position-Title/xzkq-xp2w
 
 public class Exercise3 {
-    public final static String existingFilePath = Lab1_main.existingFilePath;
+    public final static String existingFilePath = CSVFiles.EXISTING_FILE_PATH;
     public final static String existingFileName = "Current_Employee_Names__Salaries__and_Position_Titles.csv";
     public final static String existingFullFilePath = existingFilePath + "/" + existingFileName;
     public final static int numberOfTopPayedEmployees = 15;
     public final static boolean doLoadingDots = false;
     public static final boolean doPrintMatchInfo = false;
 
-    public static void main()
-    {
+    public static void main() throws FileOpenException, BufferedReaderCloseException, BufferedReaderOpenException, FileInHandlersException, FileReaderCloseException, IOException, FileReaderOpenException {
         System.out.println("Exercise3.main() \\/\\/\\/");
 
-        File f_employees = FilesOp.openExistingFile( existingFullFilePath );
+        File f_employees = FileOps.openExistingFile( existingFullFilePath );
         top_X_most_payed_employees(f_employees);
 
         System.out.println("Exercise3.main() /\\/\\/\\");
     }
 
-    public static void top_X_most_payed_employees(File f_employees)
-    {
+    public static void top_X_most_payed_employees(File f_employees) throws IOException, BufferedReaderOpenException, BufferedReaderCloseException, FileInHandlersException, FileReaderCloseException, FileReaderOpenException {
         Employee topXemployees[];
 
         int name_column_numb = -1;
@@ -93,8 +93,7 @@ public class Exercise3 {
         }
     }
 
-    public static Employee[] gather_topX_payed_employees(File f, int name_nr, int position_nr, int department_nr, int salary_nr, int amountOfEmployeesToFind)
-    {
+    public static Employee[] gather_topX_payed_employees(File f, int name_nr, int position_nr, int department_nr, int salary_nr, int amountOfEmployeesToFind) throws IOException, BufferedReaderOpenException, BufferedReaderCloseException, FileInHandlersException, FileReaderCloseException, FileReaderOpenException {
         String functionName = "gather_topX_payed_employees(BufferedReader br, int name_nr, int position_nr, int department_nr, int salary_nr)";
         int size = amountOfEmployeesToFind;
         Employee topX[] = new Employee[size];
@@ -152,7 +151,7 @@ public class Exercise3 {
                     if(column_counter == salary_nr)
                     {
                         current_column = current_column.replace("$", "");
-                        if( current_column.isEmpty() || !ParseOp.isNumeric(current_column) ) {
+                        if( current_column.isEmpty() || !ParseOps.isNumeric(current_column) ) {
                             currentEmployee.salary = 0;
                         }
                         else {

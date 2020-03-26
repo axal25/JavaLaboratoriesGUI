@@ -1,12 +1,15 @@
 package laboratories.lab1;
 
 import utils.ExceptionMessageGenerator;
-import utils.lab1.FilesOp;
+import utils.lab1.BufferedReaderOps;
+import utils.lab1.FileOps;
+import utils.lab1.FileReaderOps;
+import utils.lab1.exceptions.BufferedReaderOpenException;
+import utils.lab1.exceptions.FileOpenException;
+import utils.lab1.exceptions.FileReaderCloseException;
+import utils.lab1.exceptions.FileReaderOpenException;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Calendar;
 
 // file source: https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2
@@ -15,35 +18,33 @@ public class Exercise2 {
     // should be 2019 if file wasn't updated
     public static final int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-    public static void main()
-    {
+    public static void main() throws FileOpenException, IOException, BufferedReaderOpenException, FileReaderCloseException, FileReaderOpenException {
         System.out.println("Excercise2.main() \\/\\/\\/");
 
         File f_crimes = null;
-        f_crimes = FilesOp.openExistingFile( Lab1_main.existingFullFilePath );
+        f_crimes = FileOps.openExistingFile( CSVFiles.EXISTING_FULL_FILE_PATH);
         int number_of_all_entries = count_all_entries( f_crimes );
         int number_of_crimes_in_year_X = count_crimes_in_year_X( Exercise2.currentYear, f_crimes );
 
         System.out.println("Excercise2.main() /\\/\\/\\");
     }
 
-    public static int count_all_entries( File f_crimes ) {
-        FileReader fileReader = FilesOp.openFileReader(f_crimes);
-        BufferedReader bufferedReader = FilesOp.openBufferedReader( fileReader );
+    public static int count_all_entries( File f_crimes ) throws FileNotFoundException, BufferedReaderOpenException, FileReaderOpenException {
+        FileReader fileReader = FileReaderOps.openFileReader(f_crimes);
+        BufferedReader bufferedReader = BufferedReaderOps.openBufferedReader( fileReader );
         int numberOfAllEntries = Exercise1.count_matching_patterns_in_column_X(bufferedReader, "", 1);
         System.out.println( "Number of all entries in file (including column titles as entry too) = " + numberOfAllEntries );
         return numberOfAllEntries;
     }
 
-    public static int count_crimes_in_year_X(int year, File f_crimes)
-    {
+    public static int count_crimes_in_year_X(int year, File f_crimes) throws FileReaderCloseException, IOException, FileReaderOpenException {
         String functionName = "count_crimes_in_year_2015(File f_crimes)";
         int number = 0;
         int year_column_numb = 0;
         int number_of_crimes_in_X = 0;
 
         FileReader fr_crimes = null;
-        fr_crimes = FilesOp.openFileReader(f_crimes);
+        fr_crimes = FileReaderOps.openFileReader(f_crimes);
 
         BufferedReader br_crimes = null;
         br_crimes = new BufferedReader(fr_crimes);
@@ -77,7 +78,7 @@ public class Exercise2 {
             String exceptionMessage = ExceptionMessageGenerator.getMessage(Exercise2.class.getName(), functionName, e);
             System.out.println(exceptionMessage);
         }
-        FilesOp.closeFileReader(fr_crimes);
+        FileReaderOps.closeFileReader(fr_crimes);
 
         return number;
     }

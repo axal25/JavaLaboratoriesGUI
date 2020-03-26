@@ -1,119 +1,115 @@
 package laboratories.lab1;
 
+import laboratories.lab1.exceptions.CopyFileException;
 import org.junit.jupiter.api.*;
-import utils.lab1.FilesOp;
+import utils.lab1.FileOps;
+import utils.lab1.FileOpsTest;
+import utils.lab1.exceptions.*;
 
 import java.io.File;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CrimesFileOpTest {
-    public final static String existingFilePath = laboratories.lab1.Lab1_main.existingFilePath;
-    public final static String existingFileName = laboratories.lab1.Lab1_main.existingFileName;
-    public final static String existingFullFilePath = existingFilePath + "/" + existingFileName;
-    public final static String notExistingFilePath = laboratories.lab1.Lab1_main.notExistingFilePath;
-    public final static String notExistingFileName = laboratories.lab1.Lab1_main.notExistingFileName;
-    public final static String notExistingFullFilePath = notExistingFilePath + "/" + notExistingFileName;
 
     @BeforeEach
     void setUp() {
+        try{
+            FileOps.deleteFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH);
+        } catch(Exception e) {};
     }
 
     @AfterEach
     void tearDown() {
+        try{
+            FileOps.deleteFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH);
+        } catch(Exception e) {};
     }
 
     @Test
     @Order(25)
-    void cutFileToSize1() {
-        final String functionName = "@Test cutFileToSize1()";
-        final String location = CrimesFileOpTest.class.getName() + " >>> " + functionName;
-        utils.PrintSystem.outBegin( location );
-
-        String newFilePath = existingFilePath + "/" + "CrimesFileOpTest_cutFileToSize_1" + existingFileName;
-
-        if( FilesOp.openNewFile( newFilePath ) == null ) {
-            Assertions.assertTrue( FilesOp.deleteFile( newFilePath ) );
-        }
-        File newFile = FilesOp.openNewFile( newFilePath );
-        File originalFile = FilesOp.openExistingFile( existingFullFilePath );
-
-        double sizeLimitInKiloB = 100.0;
-        File returnedFile = CrimesFileOp.cutFileToSize( existingFullFilePath, newFilePath, sizeLimitInKiloB, false, false, false );
-        Assertions.assertNotNull( returnedFile );
-        Assertions.assertEquals( newFile, returnedFile );
-        double returnedFileSizeKiloB = Math.floor(FilesOp.sizeBytes2KiloB(FilesOp.getFileSizeBytes( returnedFile )));
+    void cutFileToSize1() throws FileOpenException, GetFileSizeException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileWriterOpenException, FileReaderOpenException, CopyFileException {
+        File newFile = FileOps.openNewFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH);
+        Long sizeLimitInBytes = 100L*1024L;
+        File returnedFile = CrimesFileOp.cutFileToSize(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, sizeLimitInBytes, false, false, false);
+        assertNotNull(returnedFile);
+        assertEquals(newFile, returnedFile);
+        Long returnedFileSizeBytes = FileOps.getFileSizeBytes(returnedFile);
         org.hamcrest.MatcherAssert.assertThat(
-                sizeLimitInKiloB,
-                org.hamcrest.Matchers.greaterThanOrEqualTo( returnedFileSizeKiloB )
+                sizeLimitInBytes,
+                org.hamcrest.Matchers.greaterThanOrEqualTo(returnedFileSizeBytes)
         );
-        Assertions.assertTrue( returnedFileSizeKiloB <= sizeLimitInKiloB );
-        Assertions.assertTrue( FilesOp.deleteFile(newFilePath) );
-
-        utils.PrintSystem.outEnd(location);
+        assertTrue( returnedFileSizeBytes <= sizeLimitInBytes);
+        assertTrue(FileOps.deleteFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH));
     }
 
     @Test
     @Order(26)
-    void cutFileToSize2() {
-        final String functionName = "@Test cutFileToSize2()";
-        final String location = CrimesFileOpTest.class.getName() + " >>> " + functionName;
-        utils.PrintSystem.outBegin( location );
-
-        double sizeLimitInKiloB = 2*1024*1024;
-        String newFilePath = existingFilePath + "/" + "CrimesFileOpTest_cutFileToSize2_" + existingFileName;
-        File originalFile = FilesOp.openExistingFile( existingFullFilePath );
-        File returnedFile = CrimesFileOp.cutFileToSize( existingFullFilePath, newFilePath, sizeLimitInKiloB, false, false, false );
-        Assertions.assertNotNull( returnedFile );
-        Assertions.assertEquals( originalFile, returnedFile );
-        double returnedFileSizeKiloB = FilesOp.sizeBytes2KiloB(FilesOp.getFileSizeBytes( returnedFile ));
+    void cutFileToSize2() throws FileOpenException, GetFileSizeException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileWriterOpenException, FileReaderOpenException, CopyFileException {
+        File returnedFile = CrimesFileOp.cutFileToSize(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, Long.MAX_VALUE, false, false, false);
+        assertNotNull(returnedFile);
+        Long returnedFileSizeKiloB = FileOps.sizeBytes2KiloB(FileOps.getFileSizeBytes(returnedFile));
         org.hamcrest.MatcherAssert.assertThat(
-                sizeLimitInKiloB,
+                Long.MAX_VALUE,
                 org.hamcrest.Matchers.greaterThan( returnedFileSizeKiloB )
         );
-        Assertions.assertTrue( returnedFileSizeKiloB < sizeLimitInKiloB );
-        Assertions.assertFalse( FilesOp.deleteFile( newFilePath ) );
-
-        utils.PrintSystem.outEnd(location);
+        assertTrue( returnedFileSizeKiloB < Double.MAX_VALUE );
+        assertNotEquals(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH);
+        assertEquals(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, returnedFile.getAbsolutePath());
     }
 
     @Test
     @Order(27)
-    void cutFileToSize3() {
-        final String functionName = "@Test cutFileToSize3()";
-        final String location = CrimesFileOpTest.class.getName() + " >>> " + functionName;
-        utils.PrintSystem.outBegin( location );
-
-        double sizeLimitInKiloB = 100.0;
-        Assertions.assertNull( CrimesFileOp.cutFileToSize( existingFullFilePath, existingFullFilePath, sizeLimitInKiloB, false, false, false ) );
-
-        utils.PrintSystem.outEnd(location);
+    void cutFileToSize3() throws FileWriterOpenException, GetFileSizeException, FileReaderOpenException, BufferedReaderOpenException, BufferedWriterOpenException, FileOpenException, RenameFileException, IOException, CopyFileException {
+        try{
+            FileOps.deleteFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH + "_tmp");
+        } catch(Exception e) {};
+        assertNotNull(CrimesFileOp.cutFileToSize(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, 150L, false, false, false));
+        assertNotNull(CrimesFileOp.cutFileToSize(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH + "_tmp", 100L, false, true, true));
     }
 
 
     @Test
     @Order(28)
-    void cutFileToSize4() {
-        final String functionName = "@Test cutFileToSize4()";
-        final String location = CrimesFileOpTest.class.getName() + " >>> " + functionName;
-        utils.PrintSystem.outBegin( location );
+    void cutFileToSize4() throws GetFileSizeException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileOpenException, FileWriterOpenException, FileReaderOpenException, CopyFileException {
+        for(Long i = (CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES-1); i <= (1024L*1024L); i+=CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES) cutFileToSize4(i);
+    }
 
-        String copiedFullFilePath = existingFilePath + "/" + "CrimesFileOpTest_cutFileToSize4_Rename";
-        double sizeLimitInKiloB = 0.5*1024;
-        File copiedFile = CrimesFileOp.cutFileToSize( existingFullFilePath, copiedFullFilePath, sizeLimitInKiloB, false, false, false );
-        String newFilePath = existingFilePath + "/" + "renamed_CrimesFileOpTest_cutFileToSize4_Rename";
-        sizeLimitInKiloB = 1024;
-        File returnedFile = CrimesFileOp.cutFileToSize( copiedFullFilePath, newFilePath, sizeLimitInKiloB, false, true, true );
-        Assertions.assertNotNull( returnedFile );
-        Assertions.assertEquals( copiedFile.getAbsolutePath(), returnedFile.getAbsolutePath() );
-        double returnedFileSizeKiloB = FilesOp.sizeBytes2KiloB(FilesOp.getFileSizeBytes( returnedFile ));
+    void cutFileToSize4(Long copyFileSizeLimitInKiloB) throws GetFileSizeException, FileReaderOpenException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileOpenException, FileWriterOpenException, CopyFileException {
+        File copyFile = CrimesFileOp.cutFileToSize(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, copyFileSizeLimitInKiloB, false, false, false);
+        String cutFullFilePath = FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH + "_cut.txt";
+        try{
+            FileOps.deleteFile(cutFullFilePath);
+        } catch(Exception e) {};
+        Long cutFileSizeLimitInKiloB = copyFileSizeLimitInKiloB * 2;
         org.hamcrest.MatcherAssert.assertThat(
-                sizeLimitInKiloB,
-                org.hamcrest.Matchers.greaterThan( returnedFileSizeKiloB )
+                cutFileSizeLimitInKiloB,
+                org.hamcrest.Matchers.greaterThan( copyFileSizeLimitInKiloB )
         );
-        Assertions.assertTrue( returnedFileSizeKiloB < sizeLimitInKiloB );
-        Assertions.assertTrue( FilesOp.deleteFile( copiedFullFilePath ) );
-        Assertions.assertFalse( FilesOp.deleteFile( newFilePath ) );
+        assertTrue( copyFileSizeLimitInKiloB < cutFileSizeLimitInKiloB );
+        File returnedFile = CrimesFileOp.cutFileToSize(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, cutFullFilePath, cutFileSizeLimitInKiloB, false, true, true);
+        assertNotNull( returnedFile );
+        assertNotNull(FileOps.openNewFile(cutFullFilePath));
+        assertThrows(FileOpenException.class, () -> FileOps.openExistingFile(cutFullFilePath));
+        assertEquals(copyFile.getAbsolutePath(), returnedFile.getAbsolutePath());
+        Long returnedFileSizeKiloB = FileOps.sizeBytes2KiloB(FileOps.getFileSizeBytes( returnedFile ));
+        org.hamcrest.MatcherAssert.assertThat(
+                copyFileSizeLimitInKiloB,
+                org.hamcrest.Matchers.greaterThan(returnedFileSizeKiloB)
+        );
+        assertTrue(returnedFileSizeKiloB < copyFileSizeLimitInKiloB);
+        assertTrue(FileOps.deleteFile(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH));
+        assertThrows(FileOpenException.class, () -> FileOps.deleteFile(cutFullFilePath));
+    }
 
-        utils.PrintSystem.outEnd(location);
+    @Test
+    @Order(29)
+    void cutFileToSize_doRenameAndOrDelete() throws GetFileSizeException, FileReaderOpenException, CopyFileException, BufferedWriterOpenException, BufferedReaderOpenException, FileWriterOpenException, IOException, RenameFileException, FileOpenException {
+        assertNotNull(CrimesFileOp.cutFileToSize(FileOpsTest.EXISTING_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, Long.MAX_VALUE, false, false, false));
+        assertNotNull(CrimesFileOp.cutFileToSize(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, Long.MAX_VALUE, false, false, true));
+        assertThrows(FileOpenException.class, () -> CrimesFileOp.cutFileToSize(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, 512L, false, true, true));
+        assertThrows(CopyFileException.class, () -> CrimesFileOp.cutFileToSize(FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH, FileOpsTest.NOT_EXISTING_CREATED_JUST_FOR_TESTS_FULL_FILE_PATH + "_tmp", 512L, false, false, true));
     }
 }

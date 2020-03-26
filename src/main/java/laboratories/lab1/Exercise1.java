@@ -1,23 +1,81 @@
 package laboratories.lab1;
 
+import laboratories.lab1.exceptions.CopyFileException;
 import utils.ExceptionMessageGenerator;
-import utils.lab1.FilesOp;
+import utils.lab1.BufferedReaderOps;
+import utils.lab1.FileOps;
+import utils.lab1.FileReaderOps;
+import utils.lab1.exceptions.*;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-// file source: https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2
-
 public class Exercise1 {
-    public static final boolean doPrintMatchInfo = false;
+    public static final String EXISTING_FILE_NAME = "exercise1_smaller_" + CSVFiles.EXISTING_FILE_NAME;
+    public static final String EXISTING_FILE_PATH = CSVFiles.EXISTING_FILE_PATH;
+    public static final String EXISTING_FULL_FILE_PATH = EXISTING_FILE_PATH + File.separator + EXISTING_FILE_NAME;
+    public static final String[] DISPLAY_TEXT = {
+            "    public static void shortenFileCrimes(Long sizeLimitInBytes) throws ... {\n" +
+                    "        System.out.println(Exercise1.class.getName() + \" >>> shortenFileCrimes(Long sizeLimitInBytes) \\\\/\\\\/\\\\/\");\n" +
+                    "        CSVFiles.makeSureUntouchableSourceFileIsRightSize();\n" +
+                    "        try {\n" +
+                    "            FileOps.deleteFile(EXISTING_FULL_FILE_PATH);\n" +
+                    "        } catch(Exception e) {}\n" +
+                    "        final String untouchableSource_FullFilePath = CSVFiles.EXISTING_FULL_FILE_PATH;\n" +
+                    "        final String modifiableSource_FileName = EXISTING_FILE_NAME;\n" +
+                    "        final String modifiableSource_FullFilePath = EXISTING_FILE_PATH + File.separator + modifiableSource_FileName;\n" +
+                    "        // just copies the file\n" +
+                    "        CrimesFileOp.cutFileToSize(\n" +
+                    "                untouchableSource_FullFilePath,\n" +
+                    "                modifiableSource_FullFilePath,\n" +
+                    "                Long.MAX_VALUE,\n" +
+                    "                false,\n" +
+                    "                false,\n" +
+                    "                false\n" +
+                    "        );\n" +
+                    "        Long fileSizeBytes = FileOps.getFileSizeBytes(modifiableSource_FullFilePath);\n" +
+                    "        System.out.println( \"file size \\\"\" + modifiableSource_FileName + \"\\\"(B)  = \" + fileSizeBytes );\n" +
+                    "        Long fileSizeKiloB = FileOps.sizeBytes2KiloB( fileSizeBytes );\n" +
+                    "        System.out.println( \"file size \\\"\" + modifiableSource_FileName + \"\\\"(KB)  = \" + fileSizeKiloB );\n" +
+                    "        Long fileSizeMegaB = FileOps.sizeBytes2MegaB( fileSizeBytes );\n" +
+                    "        System.out.println( \"file size \\\"\" + modifiableSource_FileName + \"\\\"(MB)  = \" + fileSizeMegaB );\n" +
+                    "        Long fileSizeGigaB = FileOps.sizeBytes2GigaB( fileSizeBytes );\n" +
+                    "        System.out.println( \"file size \\\"\" + modifiableSource_FileName + \"\\\"(GB)  = \" + fileSizeGigaB );\n" +
+                    "        // modifies the copied file\n" +
+                    "        CrimesFileOp.cutFileToSize(\n" +
+                    "                modifiableSource_FullFilePath,\n" +
+                    "                modifiableSource_FullFilePath + \"_tmp\",\n" +
+                    "                sizeLimitInBytes,\n" +
+                    "                false,\n" +
+                    "                true,\n" +
+                    "                true\n" +
+                    "        );\n" +
+                    "        System.out.println(\n" +
+                    "                \"Changed file: \\n\\r\" +\n" +
+                    "                        \"\\\"\" + modifiableSource_FullFilePath + \"\\\" \\n\\r\" +\n" +
+                    "                        \"so its size would be equal to \" + sizeLimitInBytes + \" Bytes \\n\\r\" +\n" +
+                    "                        \"\\t\" + \"its real size is \" + FileOps.getFileSizeBytes(modifiableSource_FullFilePath) + \" Bytes\"\n" +
+                    "        );\n" +
+                    "        System.out.println(Exercise1.class.getName() + \" >>> shortenFileCrimes(Long sizeLimitInBytes) /\\\\/\\\\/\\\\\");\n" +
+                    "    }"
+    };
 
-    public static void main()
-    {
+    public static final boolean doPrintMatchInfo = false;
+    public static MySystem System = new MySystem(java.lang.System.out);
+
+    public Exercise1(PrintStream out) {
+        System = new MySystem(out);
+    }
+
+    public static void main() throws FileOpenException, BufferedReaderCloseException, FileReaderCloseException, IOException, BufferedReaderOpenException, FileReaderOpenException {
         System.out.println("Excercise1.main() \\/\\/\\/");
 
-        System.out.println("Workspace project path (absolute path): " + System.getProperty("user.dir"));
+        System.out.println("Workspace project path (absolute path) [System.getProperty(\"user.dir\")]: " + System.getProperty("user.dir"));
+
         System.out.println("Should equal to something like: \t\t" +
                 "\"/home/jackdaeel/IdeaProjects/JavaProjects/JavaLaboratories\"");
 
@@ -25,51 +83,25 @@ public class Exercise1 {
         // ../../../resources/csv/  Crimes_-_2001_to_present.csv
         //                          Current_Employee_Names__Salaries__and_Position_Titles.csv
 
-        shortenFileCrimes( 1024 );
-
         File f_crimes = null;
 
-        f_crimes = FilesOp.openExistingFile( Lab1_main.existingFullFilePath );
-        f_crimes = FilesOp.openExistingFile( Lab1_main.existingFilePath, Lab1_main.existingFileName );
+        f_crimes = FileOps.openExistingFile(CSVFiles.EXISTING_FULL_FILE_PATH);
+        f_crimes = FileOps.openExistingFile(CSVFiles.EXISTING_FILE_PATH, CSVFiles.EXISTING_FILE_NAME);
 
         int number_of_GTA = count_GTA_in_crimes(f_crimes);
         System.out.println("Count of \"Grand Theft Auto\" crimes = " + number_of_GTA );
         System.out.println("Excercise1.main() /\\/\\/\\");
     }
 
-    public static void shortenFileCrimes(double sizeLimitInKiloB) {
-        double fileSizeBytes = Double.MIN_VALUE;
-        System.out.println("Excercise1.shortenFileCrimes() \\/\\/\\/");
-
-        String fileName = "Crimes_-_2001_to_present.csv";
-        String filePathWithoutName = System.getProperty("user.dir")+"/resources/csv/";
-        String filePath = filePathWithoutName + fileName;
-        fileSizeBytes = FilesOp.getFileSizeBytes( filePath );
-        System.out.println( "file size \"Crimes_-_2001_to_present.csv\"(B)  = " + fileSizeBytes );
-        double fileSizeKiloB = FilesOp.sizeBytes2KiloB( fileSizeBytes );
-        System.out.println( "file size \"Crimes_-_2001_to_present.csv\"(KB) = " + fileSizeKiloB );
-        double fileSizeMegaB = FilesOp.sizeBytes2MegaB( fileSizeBytes );
-        System.out.println( "file size \"Crimes_-_2001_to_present.csv\"(MB) = " + fileSizeMegaB );
-        double fileSizeGigaB = FilesOp.sizeBytes2GigaB( fileSizeBytes );
-        System.out.println( "file size \"Crimes_-_2001_to_present.csv\"(GB) = " + fileSizeGigaB );
-
-        CrimesFileOp.cutFileToSize( filePath, filePathWithoutName + "/" + "smaller_" + fileName, 1024, false, true, true );
-        System.out.println("Changed file \"" + filePath + "\" so it's size would be equal to 1024 KiloBytes" + "\n\r" +
-                "\t" + "real size = " + FilesOp.sizeBytes2KiloB(FilesOp.getFileSizeBytes( filePath )) + " KB");
-
-        System.out.println("Excercise1.shortenFileCrimes() /\\/\\/\\");
-    }
-
-    public static int count_GTA_in_crimes(File f_crimes)
-    {
+    public static int count_GTA_in_crimes(File f_crimes) throws FileReaderCloseException, IOException, BufferedReaderCloseException, BufferedReaderOpenException, FileReaderOpenException {
         int number_of_GTA = 0;
         int crime_type_column_numb = 0;
 
         java.io.FileReader fr_crimes = null;
-        fr_crimes = FilesOp.openFileReader(f_crimes);
+        fr_crimes = FileReaderOps.openFileReader(f_crimes);
 
         BufferedReader br_crimes = null;
-        br_crimes = FilesOp.openBufferedReader( fr_crimes );
+        br_crimes = BufferedReaderOps.openBufferedReader( fr_crimes );
 
         crime_type_column_numb = find_matching_column_number(br_crimes, "Primary Type");
         if( crime_type_column_numb != -1 )
@@ -83,8 +115,8 @@ public class Exercise1 {
             System.out.println("Cound not find column number of \"Primary Type\"");
         }
 
-        FilesOp.closeBufferedReader( br_crimes );
-        FilesOp.closeFileReader( fr_crimes );
+        BufferedReaderOps.closeBufferedReader( br_crimes );
+        FileReaderOps.closeFileReader( fr_crimes );
 
         return number_of_GTA;
     }
@@ -183,4 +215,47 @@ public class Exercise1 {
         return crimeCounter;
     }
 
+    public static void shortenFileCrimes(Long sizeLimitInBytes) throws GetFileSizeException, FileOpenException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, CopyFileException, RenameFileException, FileWriterOpenException, FileReaderOpenException {
+        System.out.println(Exercise1.class.getName() + " >>> shortenFileCrimes(Long sizeLimitInBytes) \\/\\/\\/");
+        CSVFiles.makeSureUntouchableSourceFileIsRightSize();
+        try {
+            FileOps.deleteFile(EXISTING_FULL_FILE_PATH);
+        } catch(Exception e) {}
+        final String untouchableSource_FullFilePath = CSVFiles.EXISTING_FULL_FILE_PATH;
+        final String modifiableSource_FileName = EXISTING_FILE_NAME;
+        final String modifiableSource_FullFilePath = EXISTING_FILE_PATH + File.separator + modifiableSource_FileName;
+        // just copies the file
+        CrimesFileOp.cutFileToSize(
+                untouchableSource_FullFilePath,
+                modifiableSource_FullFilePath,
+                Long.MAX_VALUE,
+                false,
+                false,
+                false
+        );
+        Long fileSizeBytes = FileOps.getFileSizeBytes(modifiableSource_FullFilePath);
+        System.out.println( "file size \"" + modifiableSource_FileName + "\"(B)  = " + fileSizeBytes );
+        Long fileSizeKiloB = FileOps.sizeBytes2KiloB( fileSizeBytes );
+        System.out.println( "file size \"" + modifiableSource_FileName + "\"(KB)  = " + fileSizeKiloB );
+        Long fileSizeMegaB = FileOps.sizeBytes2MegaB( fileSizeBytes );
+        System.out.println( "file size \"" + modifiableSource_FileName + "\"(MB)  = " + fileSizeMegaB );
+        Long fileSizeGigaB = FileOps.sizeBytes2GigaB( fileSizeBytes );
+        System.out.println( "file size \"" + modifiableSource_FileName + "\"(GB)  = " + fileSizeGigaB );
+        // modifies the copied file
+        CrimesFileOp.cutFileToSize(
+                modifiableSource_FullFilePath,
+                modifiableSource_FullFilePath + "_tmp",
+                sizeLimitInBytes,
+                false,
+                true,
+                true
+        );
+        System.out.println(
+                "Changed file: \n\r" +
+                        "\"" + modifiableSource_FullFilePath + "\" \n\r" +
+                        "so its size would be equal to " + sizeLimitInBytes + " Bytes \n\r" +
+                        "\t" + "its real size is " + FileOps.getFileSizeBytes(modifiableSource_FullFilePath) + " Bytes"
+        );
+        System.out.println(Exercise1.class.getName() + " >>> shortenFileCrimes(Long sizeLimitInBytes) /\\/\\/\\");
+    }
 }

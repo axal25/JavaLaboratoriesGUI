@@ -8,7 +8,7 @@
     -fx-font-size: 12;
     -jfx-button-type: RAISED;
     -fx-background-color: rgb(77,102,204);
-    -fx-pref-width: 150;
+    -fx-min-width: 150;
     -fx-text-fill: WHITE;
 }
 
@@ -141,4 +141,9 @@
     -fx-background-color: rgb(150, 150, 150);
     -fx-text-fill: rgb(255, 255, 255);
     -fx-border-width: 5;
+}
+
+.jfx-text-field{
+    -fx-background-color: rgb(150, 150, 150);
+    -fx-text-fill: rgb(255, 255, 255);
 }
