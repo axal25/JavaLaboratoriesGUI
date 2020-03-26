@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>jo</groupId>
-  <artifactId>JavaLaboratories</artifactId>
+  <artifactId>JavaLaboratoriesGUI</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>JavaLaboratoriesGUI</name>
@@ -234,19 +234,25 @@
         </executions>
       </plugin>
 
-<!--      <plugin>-->
-<!--        <artifactId>maven-jar-plugin</artifactId>-->
-<!--        <version>3.0.2</version>-->
-<!--        <configuration>-->
-<!--          <archive>-->
-<!--            <manifest>-->
-<!--              <addClasspath>true</addClasspath>-->
-<!--              <classpathPrefix>home/jackdaeel/.m2/repository/</classpathPrefix>-->
-<!--              <mainClass>Main</mainClass>-->
-<!--            </manifest>-->
-<!--          </archive>-->
-<!--        </configuration>-->
-<!--      </plugin>-->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>default-jar</id>
+            <phase/>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                  <classpathPrefix>home/jackdaeel/.m2/repository/</classpathPrefix>
+                  <mainClass>Main</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 
     </plugins>
   </build>

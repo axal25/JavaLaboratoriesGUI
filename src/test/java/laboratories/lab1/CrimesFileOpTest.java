@@ -74,7 +74,7 @@ public class CrimesFileOpTest {
     @Test
     @Order(28)
     void cutFileToSize4() throws GetFileSizeException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileOpenException, FileWriterOpenException, FileReaderOpenException, CopyFileException {
-        for(Long i = (CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES-1); i <= (1024L*1024L); i+=CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES) cutFileToSize4(i);
+        for(Long i = (CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES-1); i <= (1024L*1024L); i+=(CrimesFileOp.OVERHEAD_PER_HOW_MANY_BYTES*10L)) cutFileToSize4(i);
     }
 
     void cutFileToSize4(Long copyFileSizeLimitInKiloB) throws GetFileSizeException, FileReaderOpenException, BufferedWriterOpenException, IOException, BufferedReaderOpenException, RenameFileException, FileOpenException, FileWriterOpenException, CopyFileException {

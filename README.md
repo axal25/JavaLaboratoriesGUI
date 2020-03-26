@@ -16,6 +16,12 @@ Java project includes all of small projects from coding laboratories
 ##### Laboratory #1 Introduction [Laboratories > Laboratory #1 (> Exercises > Introduction)]:
 <img src="./screens/Laboratory_1_Introduction.png" width="30%">
 
+##### Laboratory #1 Exercise 1 [Laboratories > Laboratory #1 > Exercises > Exercise 1]:
+<img src="./screens/Laboratory_1_Exercise_1.png" width="30%">
+
+##### Error / Exception Pop Up Window [on button click inside Exercise 1 after manually removing the file]:
+<img src="./screens/Exception_Error_Pop_Up.png" width="30%">
+
 ## Tech stack:
 1. Java 11
 2. Maven 3.6.0
