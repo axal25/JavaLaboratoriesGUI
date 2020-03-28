@@ -15,10 +15,10 @@ import ui.center.factory.CenterOption;
 import ui.center.factory.CenterOptionFactory;
 import ui.center.options.*;
 import ui.center.options.home.HomeUI;
-import ui.center.options.laboratory1.Lab1UI;
-import ui.center.options.laboratory2.Laboratory2UI;
-import ui.center.options.lambda.expressions.LambdaExpressionsUI;
-import ui.center.options.mayeryn.recruitment.MayerynRecruitmentUI;
+import ui.center.options.lab1.Lab1UI;
+import ui.center.options.lab2.Lab2UI;
+import ui.center.options.lambda.exp.LambdaExpUI;
+import ui.center.options.mayeryn.recruit.MayerynRecruitUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -112,13 +112,13 @@ public class MainUIController implements Initializable {
                 exercises = Lab1UI.EXERCISES;
                 break;
             case LABORATORY_2:
-                exercises = Laboratory2UI.EXERCISES;
+                exercises = Lab2UI.EXERCISES;
                 break;
             case LAMBDA_EXPRESSIONS:
-                exercises = LambdaExpressionsUI.EXERCISES;
+                exercises = LambdaExpUI.EXERCISES;
                 break;
             case MAYERYN_RECRUITMENT:
-                exercises = MayerynRecruitmentUI.EXERCISES;
+                exercises = MayerynRecruitUI.EXERCISES;
                 break;
             default:
                 throw new UnsupportedOperationException("Unsupported option: " + centerOption);

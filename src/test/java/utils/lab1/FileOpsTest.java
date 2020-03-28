@@ -1,6 +1,6 @@
 package utils.lab1;
 
-import laboratories.lab1.CSVFiles;
+import labs.lab1.CSVFiles;
 import org.junit.jupiter.api.*;
 import utils.lab1.exceptions.*;
 

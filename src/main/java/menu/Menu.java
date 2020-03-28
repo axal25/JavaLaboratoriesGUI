@@ -1,5 +1,6 @@
 package menu;
 
+import recruitment.mayeryn.Mayeryn;
 import utils.ExceptionMessageGenerator;
 
 import java.util.Scanner;
@@ -86,9 +87,9 @@ public class Menu {
 
         // recruitment.exercises.mayeryn.Mayeryn.main();
         optionsToBe[3] = new Option(
-                recruitment.exercises.mayeryn.Mayeryn.class.getName(),
+                Mayeryn.class.getName(),
                 "main()",
-                recruitment.exercises.mayeryn.Mayeryn::main
+                Mayeryn::main
         );
 
         return optionsToBe;
