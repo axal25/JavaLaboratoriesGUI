@@ -15,7 +15,7 @@ import ui.center.factory.CenterOption;
 import ui.center.factory.CenterOptionFactory;
 import ui.center.options.*;
 import ui.center.options.home.HomeUI;
-import ui.center.options.laboratory1.Laboratory1UI;
+import ui.center.options.laboratory1.Lab1UI;
 import ui.center.options.laboratory2.Laboratory2UI;
 import ui.center.options.lambda.expressions.LambdaExpressionsUI;
 import ui.center.options.mayeryn.recruitment.MayerynRecruitmentUI;
@@ -53,7 +53,7 @@ public class MainUIController implements Initializable {
 
     private void loadCenter() {
         this.abstractCenterUI = CenterFactory.getCenter(this.centerOption, this.exercise);
-        ObjectProperty<Node> newCenterNodeProperty = abstractCenterUI.getController().centerNodeProperty;
+        ObjectProperty<Node> newCenterNodeProperty = abstractCenterUI.getController().getCenterNodeProperty();
         setCenterNodeProperty(newCenterNodeProperty);
     }
 
@@ -109,7 +109,7 @@ public class MainUIController implements Initializable {
                 exercises = HomeUI.EXERCISES;
                 break;
             case LABORATORY_1:
-                exercises = Laboratory1UI.EXERCISES;
+                exercises = Lab1UI.EXERCISES;
                 break;
             case LABORATORY_2:
                 exercises = Laboratory2UI.EXERCISES;

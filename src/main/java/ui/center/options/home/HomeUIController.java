@@ -13,7 +13,7 @@ public class HomeUIController extends AbstractCenterUIController {
     public VBox centerNode;
     public ObjectProperty<Node> centerNodeProperty = new SimpleObjectProperty<>();
 
-    public HomeUIController() { super.centerNodeProperty = this.centerNodeProperty; }
+    public HomeUIController() { super.setCenterNodeProperty(this.centerNodeProperty); }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

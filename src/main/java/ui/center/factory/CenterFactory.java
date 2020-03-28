@@ -2,7 +2,7 @@ package ui.center.factory;
 
 import ui.center.options.*;
 import ui.center.options.home.HomeUI;
-import ui.center.options.laboratory1.Laboratory1UI;
+import ui.center.options.laboratory1.Lab1UI;
 import ui.center.options.laboratory2.Laboratory2UI;
 import ui.center.options.lambda.expressions.LambdaExpressionsUI;
 import ui.center.options.mayeryn.recruitment.MayerynRecruitmentUI;
@@ -15,7 +15,7 @@ public class CenterFactory {
                 return new HomeUI(exercise);
 
             case LABORATORY_1:
-                return new Laboratory1UI(exercise);
+                return new Lab1UI(exercise);
 
             case LABORATORY_2:
                 return new Laboratory2UI(exercise);

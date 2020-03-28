@@ -8,14 +8,14 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="ui.center.options.laboratory1.Laboratory1UIExercise3"
+      fx:controller="ui.center.options.laboratory1.Lab1UIEx3Controller"
       fx:id="centerNode"
       alignment="CENTER">
 
     <children>
         <HBox alignment="CENTER">
             <children>
-                <Label text="Laboratory #1 Exercise 3"/>
+                <Label text="Laboratory #1 Exercise #3"/>
             </children>
         </HBox>
     </children>

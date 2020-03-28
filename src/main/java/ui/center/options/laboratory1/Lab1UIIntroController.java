@@ -1,20 +1,24 @@
 package ui.center.options.laboratory1;
 
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import laboratories.lab1.Introduction;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Laboratory1UIIntroduction implements Initializable {
-    public ScrollPane scrollPane;
-    public TextArea sourceTextArea1, outputTextArea1, sourceTextArea2, outputTextArea2, sourceTextArea3, outputTextArea3;
-
+@Setter
+@Getter
+public class Lab1UIIntroController implements Initializable {
+    @FXML private ScrollPane scrollPane;
+    @FXML private TextArea sourceTextArea1, outputTextArea1, sourceTextArea2, outputTextArea2, sourceTextArea3, outputTextArea3;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

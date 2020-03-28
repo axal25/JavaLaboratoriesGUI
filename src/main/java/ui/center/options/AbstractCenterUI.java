@@ -2,15 +2,19 @@ package ui.center.options;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 
+@Getter
+@Setter
 public abstract class AbstractCenterUI {
     public static final String DEFAULT_EXERCISES_MENU_ITEM_TEXT = "The only exercise";
 
-    AbstractCenterUIController controller = null;
+    private AbstractCenterUIController controller = null;
 
     private AbstractCenterUI() {}
 

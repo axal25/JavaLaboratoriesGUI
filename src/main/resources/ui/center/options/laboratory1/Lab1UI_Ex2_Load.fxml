@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="centerNode" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.laboratory1.Laboratory1UIController">
+<VBox fx:id="centerNode" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.laboratory1.Lab1UIController">
 
     <children>
         <HBox alignment="CENTER">
             <children>
-                <Label text="Laboratory #1 Exercise #3">
+                <Label text="Laboratory #1 Exercise #2">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>

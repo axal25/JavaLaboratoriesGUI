@@ -10,22 +10,28 @@ import ui.center.options.NoMatchingIndexFoundException;
 import java.io.File;
 import java.net.URL;
 
-public class Laboratory1UI extends AbstractCenterUI {
+public class Lab1UI extends AbstractCenterUI {
     public static final String[] VIEW_FILE_NAMES = {
-            "Laboratory1UI_Introduction_Loading.fxml",
-            "Laboratory1UI_Exercise1_Loading.fxml",
-            "Laboratory1UI_Exercise2_Loading.fxml",
-            "Laboratory1UI_Exercise3_Loading.fxml",
+            "Lab1UI_Overview_Load.fxml",
+            "Lab1UI_Intro_Load.fxml",
+            "Lab1UI_FileShort_Load.fxml",
+            "Lab1UI_Ex1_Load.fxml",
+            "Lab1UI_Ex2_Load.fxml",
+            "Lab1UI_Ex3_Load.fxml",
     };
     public static final String[] COMPLEX_VIEW_FILE_NAMES = {
-            "Laboratory1UI_Introduction_Complex.fxml",
-            "Laboratory1UI_Exercise1_Complex.fxml",
-            "Laboratory1UI_Exercise2_Complex.fxml",
-            "Laboratory1UI_Exercise3_Complex.fxml",
+            "Lab1UI_Overview_Comp.fxml",
+            "Lab1UI_Intro_Comp.fxml",
+            "Lab1UI_FileShort_Comp.fxml",
+            "Lab1UI_Ex1_Comp.fxml",
+            "Lab1UI_Ex2_Comp.fxml",
+            "Lab1UI_Ex3_Comp.fxml",
     };
     public static final String VIEW_FILE_PACKAGE = "ui" + File.separator + "center" + File.separator + "options" + File.separator + "laboratory1";
     public static final String[] EXERCISES = {
+            "Overview",
             "Introduction",
+            "File Shortening",
             "Exercise #1",
             "Exercise #2",
             "Exercise #3",
@@ -33,9 +39,9 @@ public class Laboratory1UI extends AbstractCenterUI {
     public static final Long FAKE_LOADING_DELAY = 500L;
 
     private Parent parent;
-    private Laboratory1UIController controller;
+    private Lab1UIController controller;
 
-    public Laboratory1UI(String exercise) {
+    public Lab1UI(String exercise) {
         super(exercise);
         loadComplexScene(exercise);
     }
@@ -71,7 +77,7 @@ public class Laboratory1UI extends AbstractCenterUI {
         };
 
         loadTask.setOnSucceeded(workerStateEvent -> {
-            super.getController().centerNodeProperty.set(loadTask.getValue());
+            super.getController().getCenterNodeProperty().set(loadTask.getValue());
         });
 
         loadTask.setOnFailed(workerStateEvent -> {

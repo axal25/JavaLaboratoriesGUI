@@ -3,7 +3,11 @@ package ui.center.options;
 import javafx.beans.property.ObjectProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class AbstractCenterUIController implements Initializable {
-    public ObjectProperty<Node> centerNodeProperty;
+    private ObjectProperty<Node> centerNodeProperty;
 }
