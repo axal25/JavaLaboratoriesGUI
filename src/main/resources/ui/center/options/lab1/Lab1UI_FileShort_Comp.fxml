@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -81,7 +84,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <JFXTextField fx:id="sizeToShortenTheFileToTextField" promptText="Size in Bytes">
+                        <JFXTextField fx:id="sizeToShortenFileToTextField" promptText="Size in Bytes">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
@@ -91,9 +94,38 @@
                         </JFXTextField>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="286.0">
+                     <children>
+                        <Label text="Please choose:">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></Label>
+                        <JFXComboBox fx:id="threadyComboBox" promptText="ThreadyInterface Option">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <Label>
+                                    Task
+                                 </Label>
+                                 <Label>
+                                    Runnable
+                                 </Label>
+                              </FXCollections>
+                           </items>
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </JFXComboBox>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXButton fx:id="shortenButton" alignment="CENTER" onAction="#handleShortenButtonClick" text="Click to shorten the file and print output">
+                        <JFXButton fx:id="shortenButton" alignment="CENTER" onAction="#handleShortenButtonClick" styleClass="bigger-green-button" text="Click to shorten the file and print output">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
@@ -101,6 +133,18 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hBoxAroundProgressBar" alignment="CENTER">
+                     <children>
+                        <JFXProgressBar fx:id="progressBar">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </JFXProgressBar>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">

@@ -20,6 +20,7 @@
     -fx-background-color: rgb(134, 0, 17);
 }
 
+/*id="bigger-button*/
 #bigger-button{
     -fx-padding: 0.7em 0.57em;
     -fx-font-size: 14px;
@@ -27,6 +28,17 @@
     -fx-background-color: rgb(77,102,204);
     -fx-pref-width: 200;
     -fx-text-fill: WHITE;
+}
+
+/*styleClass="bigger-button*/
+.bigger-green-button{
+    -fx-font-size: 20px;
+    -fx-background-size: 20px;
+    -fx-background-color: rgb(54, 117, 0);
+}
+
+.bigger-green-button:disabled{
+    -fx-background-color: rgb(134, 0, 17);
 }
 
 .label{
@@ -164,4 +176,64 @@
 
 .text-field .editable {
     -fx-background-color: red;
+}
+
+
+.combo-box-base .label,
+.choice-box-base .label {
+    -fx-opacity: 1;
+}
+
+.combo-box,
+.choice-box {
+    -fx-background-color: rgb(150, 150, 150);
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view,
+.choice-box-popup .list-view{
+    -fx-background-color: linear-gradient(from 50% 100% to 50% 0%, rgb(120, 120, 120), rgb(60, 60, 60));
+}
+
+.combo-box .list-cell,
+.choice-box .list-cell {
+    -fx-background-color: transparent;
+}
+
+.combo-box .list-cell:hover,
+.choice-box .list-cell:hover {
+    -fx-background-color: rgb(185, 185, 185);
+    -fx-background-radius: 10;
+    -fx-opacity: 1;
+}
+
+.combo-box .list-cell:selected,
+.choice-box .list-cell:selected{
+    -fx-background-color: rgb(77,102,204);
+    -fx-background-radius: 10;
+    -fx-border-color: rgb(93, 119, 255);
+    -fx-border-width: 5;
+    -fx-border-radius: 5;
+    -fx-opacity: 0.75;
+}
+
+.combo-box .list-cell:hover,
+.combo-box .list-cell:hover {
+    -fx-opacity: 1;
+}
+
+.combo-box .list-cell .label,
+.choice-box .list-cell .label {
+    -fx-opacity: 0.75;
+}
+
+.combo-box .list-cell:hover .label,
+.choice-box .list-cell:hover .label {
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-opacity: 1;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: white;
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="centerNode" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.lab1.Lab1UIEx1Controller">
+<VBox fx:id="centerNode" alignment="CENTER" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.center.options.lab1.Lab1UIEx1Controller">
 
     <children>
         <HBox alignment="CENTER">

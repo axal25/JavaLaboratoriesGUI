@@ -6,10 +6,12 @@ import ui.center.options.lab1.Lab1UI;
 import ui.center.options.lab2.Lab2UI;
 import ui.center.options.lambda.exp.LambdaExpUI;
 import ui.center.options.mayeryn.recruit.MayerynRecruitUI;
+import ui.pop.up.ErrorPopUpUI;
 
 public class CenterFactory {
 
-    public static AbstractCenterUI getCenter(CenterOption centerOption, String exercise) {
+    private static AbstractCenterUI getCenter(CenterOption centerOption, String exercise) throws Exception {
+        if(centerOption == null) throw new NullPointerException("Parameter CenterOption centerOption == null");
         switch (centerOption) {
             case HOME:
                 return new HomeUI(exercise);
@@ -27,7 +29,17 @@ public class CenterFactory {
                 return new MayerynRecruitUI(exercise);
 
             default:
-                throw new UnsupportedOperationException("Unsupported CenterOption: " + centerOption);
+                throw new Exception("Unsupported CenterOption: " + centerOption);
+        }
+    }
+
+    public static AbstractCenterUI getSafelyCenter(CenterOption centerOption, String exercise, AbstractCenterUI fallbackCenter) {
+        try {
+            return getCenter(centerOption, exercise);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Error during shortening of file", e.getMessage());
+            return fallbackCenter;
         }
     }
 }

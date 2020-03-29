@@ -16,8 +16,12 @@ Java project includes all of small projects from coding laboratories
 ##### Laboratory #1 Introduction [Laboratories > Laboratory #1 (> Exercises > Introduction)]:
 <img src="./screens/Laboratory_1_Introduction.png" width="30%">
 
-##### Laboratory #1 Exercise 1 [Laboratories > Laboratory #1 > Exercises > Exercise 1]:
-<img src="./screens/Laboratory_1_Exercise_1.png" width="30%">
+##### Laboratory #1 File Shortening 1 [Laboratories > Laboratory #1 > Exercises > File Shortening]:
+###### Not selected ThreadyInterface Option or Bad size to shorten the file to
+<img src="./screens/Laboratory_1_File_Shortening_Bad.png" width="30%">
+
+###### Selected ThreadyInterface Option and Good size to shorten the file to (also loading new results - progress bar)
+<img src="./screens/Laboratory_1_File_Shortening_Good.png" width="30%">
 
 ##### Error / Exception Pop Up Window [on button click inside Exercise 1 after manually removing the file]:
 <img src="./screens/Exception_Error_Pop_Up.png" width="30%">

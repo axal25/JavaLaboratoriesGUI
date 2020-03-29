@@ -1,11 +1,11 @@
 package ui.center.factory;
 
 public enum CenterOption {
-    HOME (CenterOptionFactory.stringCodes[0]),
-    LABORATORY_1 (CenterOptionFactory.stringCodes[1]),
-    LABORATORY_2 (CenterOptionFactory.stringCodes[2]),
-    LAMBDA_EXPRESSIONS (CenterOptionFactory.stringCodes[3]),
-    MAYERYN_RECRUITMENT (CenterOptionFactory.stringCodes[4]);
+    HOME (CenterOptionFactory.STRING_CODES[0]),
+    LABORATORY_1 (CenterOptionFactory.STRING_CODES[1]),
+    LABORATORY_2 (CenterOptionFactory.STRING_CODES[2]),
+    LAMBDA_EXPRESSIONS (CenterOptionFactory.STRING_CODES[3]),
+    MAYERYN_RECRUITMENT (CenterOptionFactory.STRING_CODES[4]);
 
     private String stringCode;
 

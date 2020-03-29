@@ -52,7 +52,7 @@ public class MainUIController implements Initializable {
     }
 
     private void loadCenter() {
-        this.abstractCenterUI = CenterFactory.getCenter(this.centerOption, this.exercise);
+        this.abstractCenterUI = CenterFactory.getSafelyCenter(this.centerOption, this.exercise, this.abstractCenterUI);
         ObjectProperty<Node> newCenterNodeProperty = abstractCenterUI.getController().getCenterNodeProperty();
         setCenterNodeProperty(newCenterNodeProperty);
     }
@@ -78,7 +78,7 @@ public class MainUIController implements Initializable {
             MenuItem[] menuItems = copyMenuItemsToArray(menu.getItems());
             for (int i=0; i < menuItems.length; i++) {
                 menuItems[i].getStyleClass().removeAll(DEFAULT_MENU_ITEM_CSS_STYLE, SELECTED_MENU_ITEM_CSS_STYLE);
-                if(CenterOptionFactory.getCenterOption(menuItems[i].getText()) == this.centerOption) menuItems[i].getStyleClass().add(SELECTED_MENU_ITEM_CSS_STYLE);
+                if(CenterOptionFactory.getSafelyCenterOption(menuItems[i].getText(), this.centerOption) == this.centerOption) menuItems[i].getStyleClass().add(SELECTED_MENU_ITEM_CSS_STYLE);
                 else menuItems[i].getStyleClass().add(DEFAULT_MENU_ITEM_CSS_STYLE);
                 menu.getItems().remove(i);
                 menu.getItems().add(i, menuItems[i]);
@@ -141,7 +141,7 @@ public class MainUIController implements Initializable {
 
     public void handleLaboratoriesMenuItemClick(ActionEvent actionEvent) {
         String menuItemText = ((MenuItem) actionEvent.getSource()).getText();
-        CenterOption centerOption = CenterOptionFactory.getCenterOption(menuItemText);
+        CenterOption centerOption = CenterOptionFactory.getSafelyCenterOption(menuItemText, this.centerOption);
         String exercise = getExercises(centerOption)[0];
         loadNewView(centerOption, exercise);
     }

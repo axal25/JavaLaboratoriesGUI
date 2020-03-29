@@ -1,78 +1,115 @@
 package ui.center.options.lab1;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import labs.lab1.Exercise1;
 import lombok.Getter;
 import lombok.Setter;
+import ui.center.options.lab1.thready.*;
 import ui.pop.up.ErrorPopUpUI;
-import utils.lab1.FileOps;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @Getter
 @Setter
 public class Lab1UIFileShortController implements Initializable {
-    public static final Long DEFAULT_SIZE_TO_SHORTEN_THE_FILE_TO = 1024 * 1024L;
+    public static final Long DEFAULT_SIZE_TO_SHORTEN_THE_FILE_TO = 1024L * 1024L;
+    public static final Long FAKE_LOADING_DELAY = 500L;
+    public static final String EXISTING_MODIFIABLE_FULL_FILE_PATH = Exercise1.EXISTING_FULL_FILE_PATH;
 
-    @FXML private JFXTextField sizeToShortenTheFileToTextField;
+    @FXML private HBox hBoxAroundProgressBar;
+    @FXML private JFXProgressBar progressBar;
+    @FXML private JFXTextField sizeToShortenFileToTextField;
     @FXML private JFXTextField currentFileSizeTextField;
     @FXML private JFXTextArea outputTextArea;
     @FXML private JFXTextArea sourceTextArea;
     @FXML private JFXButton shortenButton;
+    @FXML private JFXComboBox threadyComboBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        sizeToShortenTheFileToTextField.textProperty().addListener((obsVal, oldText, newText) -> handleSizeToShortenTheFileToTextFieldChanged());
-        sizeToShortenTheFileToTextField.setText(String.valueOf(DEFAULT_SIZE_TO_SHORTEN_THE_FILE_TO));
-        sourceTextArea.setText(Exercise1.DISPLAY_TEXT[0]);
+        this.sizeToShortenFileToTextField.textProperty().addListener((obsVal, oldText, newText) -> handleChangeIn_SizeToShortenFileToTextField_Or_threadyComboBox());
+        this.threadyComboBox.getSelectionModel().selectedIndexProperty().addListener((obsVal, oldIndex, newIndex) -> handleChangeIn_SizeToShortenFileToTextField_Or_threadyComboBox());
+        this.sizeToShortenFileToTextField.setText(String.valueOf(DEFAULT_SIZE_TO_SHORTEN_THE_FILE_TO));
+        this.sourceTextArea.setText(Exercise1.DISPLAY_TEXT[0]);
+        this.hBoxAroundProgressBar.managedProperty().bind(this.progressBar.visibleProperty());
+        this.progressBar.setVisible(false);
     }
 
     public void handleShortenButtonClick() {
-        Long sizeToShortenTheFileTo = getSafelySizeToShortenTheFileToTextField();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ThreadyReferenceCollection threadyReferenceCollection = new ThreadyReferenceCollection(
+                this.progressBar,
+                this.sizeToShortenFileToTextField,
+                this.currentFileSizeTextField,
+                this.outputTextArea,
+                Lab1UIFileShortController.FAKE_LOADING_DELAY,
+                Lab1UIFileShortController.EXISTING_MODIFIABLE_FULL_FILE_PATH
+        );
+        ThreadyOption threadyOption = getAndValidateSelectedThreadyOption();
+        ThreadyInterface shortenFileCrimeThready = getAndValidateThready(threadyOption, threadyReferenceCollection);
+        Thread thread = new Thread((java.lang.Runnable) shortenFileCrimeThready);
+        thread.start();
+    }
+
+    public void handleChangeIn_SizeToShortenFileToTextField_Or_threadyComboBox() {
         try {
-            PrintStream out = new PrintStream(byteArrayOutputStream);
-            Exercise1 exercise1 = new Exercise1(out);
-            exercise1.shortenFileCrimes(sizeToShortenTheFileTo);
-            currentFileSizeTextField.setText(String.valueOf(FileOps.getFileSizeBytes(Exercise1.EXISTING_FULL_FILE_PATH)));
-            outputTextArea.setText(byteArrayOutputStream.toString());
+            getAndValidateSizeToShortenFileToTextField(this.sizeToShortenFileToTextField);
+            validateSelectedThreadyComboBoxText();
+            this.shortenButton.setDisable(false);
         } catch (Exception e) {
-            System.out.println(byteArrayOutputStream.toString());
-            e.printStackTrace();
-            currentFileSizeTextField.setText("! ERROR !");
-            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Error during shortening of file", e.getMessage());
+            this.shortenButton.setDisable(true);
         }
     }
 
-    public void handleSizeToShortenTheFileToTextFieldChanged() {
-        try {
-            getAndValidateSizeToShortenTheFileToTextField();
-            shortenButton.setDisable(false);
-        } catch (Exception e) {
-            shortenButton.setDisable(true);
-        }
-    }
-
-    private Long getSafelySizeToShortenTheFileToTextField() {
-        try {
-            return getAndValidateSizeToShortenTheFileToTextField();
-        } catch (Exception e) {
-            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Bad size to shorten the file to", "The size you have entered to shorten the file to is invalid.");
-            return Long.MAX_VALUE;
-        }
-    }
-
-    private Long getAndValidateSizeToShortenTheFileToTextField() throws Exception {
-        Double sizeToShortenTheFileToDouble = Double.parseDouble((sizeToShortenTheFileToTextField.getText()));
-        Long sizeToShortenTheFileToLong = sizeToShortenTheFileToDouble.longValue();
-        if(sizeToShortenTheFileToLong < 0) throw new Exception();
+    public static Long getAndValidateSizeToShortenFileToTextField(JFXTextField sizeToShortenFileToTextField) throws Exception {
+        Double sizeToShortenFileToDouble = Double.parseDouble(sizeToShortenFileToTextField.getText());
+        Long sizeToShortenTheFileToLong = sizeToShortenFileToDouble.longValue();
+        if(sizeToShortenTheFileToLong < 0) throw new Exception("Size to shorten the file to can't be lower than 0.");
         return sizeToShortenTheFileToLong;
+    }
+
+    private void validateSelectedThreadyComboBoxText() throws Exception {
+        if(this.threadyComboBox.getSelectionModel().isEmpty()) throw new Exception("Thready Interface implementation option must be chosen before running.");
+    }
+
+    private String getAndValidateSelectedThreadyComboBoxText() {
+        try {
+            validateSelectedThreadyComboBoxText();
+            return ((Label) this.threadyComboBox.getSelectionModel().getSelectedItem()).getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.currentFileSizeTextField.setText("! ERROR !");
+            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Error during shortening of file", e.getMessage());
+            return null;
+        }
+    }
+
+    private ThreadyOption getAndValidateSelectedThreadyOption() {
+        try {
+            ThreadyOption threadyOption = ThreadyOptionFactory.getThreadyOption(getAndValidateSelectedThreadyComboBoxText());
+            return threadyOption;
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.currentFileSizeTextField.setText("! ERROR !");
+            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Error during shortening of file", e.getMessage());
+            return null;
+        }
+    }
+
+    public ThreadyInterface getAndValidateThready(ThreadyOption threadyOption, ThreadyReferenceCollection threadyReferenceCollection) {
+        try {
+            ThreadyInterface threadyInterface = ThreadyFactory.getThready(threadyOption, threadyReferenceCollection);
+            return threadyInterface;
+        } catch (Exception e) {
+            e.printStackTrace();
+            threadyReferenceCollection.getCurrentFileSizeTextField().setText("! ERROR !");
+            ErrorPopUpUI errorPopUpUI = new ErrorPopUpUI("Error during shortening of file", e.getMessage());
+            threadyReferenceCollection.getProgressBar().setVisible(false);
+            return null;
+        }
     }
 }

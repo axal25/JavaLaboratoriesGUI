@@ -15,8 +15,7 @@ import java.util.ResourceBundle;
 @Setter
 public class Lab1UIController extends AbstractCenterUIController {
 
-    @FXML
-    private Node centerNode; // just for injection from Lab1UI_Intro_Load.fxml or other Laboratory1UI_... .fxml file
+    @FXML private Node centerNode; // just for injection from Lab1UI_Intro_Load.fxml or other Laboratory1UI_... .fxml file
     private ObjectProperty<Node> centerNodeProperty = new SimpleObjectProperty<>();
 
     public Lab1UIController() { super.setCenterNodeProperty(this.centerNodeProperty); }
